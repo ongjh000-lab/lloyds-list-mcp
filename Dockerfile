@@ -19,7 +19,6 @@ RUN playwright install --with-deps chromium
 
 # Copy application code
 COPY src/ ./src/
-COPY config/ ./config/
 
 # Create cache directory
 RUN mkdir -p .cache
