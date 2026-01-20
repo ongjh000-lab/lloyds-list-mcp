@@ -444,8 +444,8 @@ async def summarize_articles(
         })
 
 
-# Cleanup on server shutdown
-@server.on_shutdown
+# Cleanup function for server shutdown
+# Note: This is called by FastAPI's shutdown event handler in api.py
 async def cleanup() -> None:
     """Cleanup resources on server shutdown."""
     logger.info("Shutting down server, cleaning up resources...")
