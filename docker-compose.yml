@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - SESSION_STORE=redis
+      - REDIS_URL=redis://redis:6379/0
+      - SESSION_SECRET_KEY=${SESSION_SECRET_KEY:-dev-secret-key-change-me}
+    volumes:
+      - ./src:/app/src
+      - ./.cache:/app/.cache
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
